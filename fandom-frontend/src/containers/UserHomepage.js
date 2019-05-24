@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Splash extends Component {
+class UserHomepage extends Component {
 
   render() {
     return (
@@ -10,4 +10,4 @@ class Splash extends Component {
 
 }
 
-export default Splash;
+export default UserHomepage;
