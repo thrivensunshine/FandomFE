@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 
 const Navbar = (props) => {
 return (
-  <div>{}</div>
+  <div>
+    <h1>Hello from navbar</h1>
+  </div>
 );
 }
 export default Navbar
