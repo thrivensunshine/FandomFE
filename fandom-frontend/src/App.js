@@ -6,30 +6,43 @@ import Splash from "./containers/Splash"
 import UserHomepage from "./containers/UserHomepage"
 import Navbar from "./components/Navbar"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
+class App extends React.Component {
 
-        <img src={logo} className="App-logo" alt="logo" />
-        <Search />
-        <Splash />
-        <UserHomepage />
-        <Navbar />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+
+
+
+
+
+
+  render(){
+    return (
+      <div className="App">
+        <header className="App-header">
+
+          <img src={logo} className="App-logo" alt="logo" />
+          <Search changeStateHandler={this.changeStateHandler} />
+          <Splash />
+          <UserHomepage />
+          <Navbar />
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            >
+            Learn React
+          </a>
+        </header>
+      </div>
+    );
+  }
+
+
+
+} //end of class
 
 export default App;

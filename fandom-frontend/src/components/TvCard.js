@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TvDetailsCard from "./TvDetailsCard"
+// import TvDetailsCard from "./TvDetailsCard"
 
 class TvCard extends Component {
 
