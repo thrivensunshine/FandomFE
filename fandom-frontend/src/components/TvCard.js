@@ -3,11 +3,35 @@ import React, { Component } from 'react';
 
 class TvCard extends Component {
 
-  render() {
+
+state={
+  clicked:true
+}
+
+
+clickHandler = () =>{
+  this.setState(prevState=>({
+    clicked: !prevState.clicked
+  }))
+}
+
+  render(){
     return (
+      <div onClick={this.clickHandler}>
+      {this.state.clicked
+      ?
       <div>
-        <h1>Hello From TVCARD</h1>
+        <img src={this.props.show.thumbnail} alt={this.props.show.name}/>
+        <h1>{this.props.show.name}</h1>
       </div>
+      :
+      <div>
+        <img src={this.props.show.img_url} alt={this.props.show.name}/>
+
+
+      </div>
+    }
+  </div>
     );
   }
 

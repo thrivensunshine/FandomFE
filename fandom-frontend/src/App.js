@@ -10,18 +10,38 @@ class App extends React.Component {
 
 
 
+state ={
+  allShows: []
+}
 
 
 
+componentDidMount() {
+  this.fetchShows()
+}
+getShows = (data) =>{
+  this.setState({
+    shows: data
+  })
+}
+
+fetchShows = () =>{
+  return fetch("http://localhost:3000/api/v1/shows")
+  .then(response => response.json())
+  .then(shows =>{
+    this.setState({
+      allShows: shows
+    })
+  })
+}
 
 
   render(){
     return (
       <div className="App">
         <header className="App-header">
-
           <img src={logo} className="App-logo" alt="logo" />
-          <Search changeStateHandler={this.changeStateHandler} />
+          <Search getShows={this.getShows} allShows={this.state.allShows} />
           <Splash />
           <UserHomepage />
           <Navbar />
