@@ -5,8 +5,9 @@ import Bookmarks from "./Bookmarks"
 class Search extends Component {
 
   state={
-    term: "",
+    search: "",
     shows: []
+
   }
 
 
@@ -18,10 +19,20 @@ class Search extends Component {
 
   submitHandler = (event) =>{
     event.preventDefault()
-     this.getSearchResults()
+
+    fetch("http://localhost:3000/api/v1/search", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify(this.state)
+    })
+
+
   }
 
-  getSearchResults=()=>{
+
     // return fetch("http://localhost3000/api/v1/search",{
     //   method: "POST",
     //   headers: {
@@ -35,34 +46,18 @@ class Search extends Component {
     // })
 
 
-        fetch("http://localhost:3000/api/v1/search", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accepts": "application/json"
-          },
-          body: JSON.stringify(this.state)
-        })
-        .then(res => res.json())
-        .then(data => {
-          this.setState({
-            shows: [...this.state.shows,data]
-          })
-        })
 
-
-  }
 
   render() {
     return (
       <div>
         <form onSubmit={this.submitHandler}>
-          <input type="text" name="term" value={this.state.term} onChange={this.changeStateHandler}/>
+          <input type="text" name="search" value={this.state.search} onChange={this.changeStateHandler}/>
           <input type="submit"/>
         </form>
         <h1>Hello From Search</h1>
         <TvCard />
-        
+
       </div>
     );
   }
