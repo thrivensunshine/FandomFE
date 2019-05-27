@@ -10,8 +10,8 @@ avatar: ""
 }
 
 
-changeHandler = () =>{
-this.setState
+changeHandler = (event) =>{
+console.log(event.target)
 
 
 }
