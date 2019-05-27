@@ -15,20 +15,30 @@ clickHandler = () =>{
   }))
 }
 
+
+bookmark = () =>{
+  console.log("hello")
+}
+
+comments = () =>{
+  console.log("byeeeee")
+}
+
   render(){
+  
     return (
       <div onClick={this.clickHandler}>
       {this.state.clicked
       ?
       <div>
-        <img src={this.props.show.thumbnail} alt={this.props.show.name}/>
         <h1>{this.props.show.name}</h1>
+        <img src={this.props.show.thumbnail} alt={this.props.show.name}/>
       </div>
       :
       <div>
-        <img src={this.props.show.img_url} alt={this.props.show.name}/>
-
-
+        <img src={this.props.show.img_url} alt={this.props.show.name} width="500" height="600"/>
+  <button className="userButton" onClick={this.bookmark}>Bookmark</button>
+  <button className="userButton" onClick={this.comments}>Comments</button>
       </div>
     }
   </div>

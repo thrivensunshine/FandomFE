@@ -19,11 +19,7 @@ state ={
 componentDidMount() {
   this.fetchShows()
 }
-getShows = (data) =>{
-  this.setState({
-    shows: data
-  })
-}
+
 
 fetchShows = () =>{
   return fetch("http://localhost:3000/api/v1/shows")
@@ -34,6 +30,14 @@ fetchShows = () =>{
     })
   })
 }
+
+getShows = (data) =>{
+  this.setState({
+    shows: data
+  })
+}
+
+
 
 
   render(){

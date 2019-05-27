@@ -30,7 +30,7 @@ class Search extends Component {
       this.props.getShows(data)
     })
   }
-
+//--------------------------^^this is search bar stuff^^-------------------
 
 
 
@@ -38,6 +38,8 @@ class Search extends Component {
 
 
   render() {
+    let sortedShows = this.props.allShows.sort((a, b) => (a.name > b.name) ? 1 : -1)
+  
     return (
       <div>
         <form onSubmit={this.submitHandler}>
@@ -45,8 +47,8 @@ class Search extends Component {
           <input type="submit"/>
         </form>
         <h1>Hello From Search</h1>
-        
-        {this.props.allShows.map(show =>{
+
+        {sortedShows.map(show =>{
           return <TvCard key={show.id} show={show} />
           })}
 
