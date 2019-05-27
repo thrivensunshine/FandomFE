@@ -10,51 +10,53 @@ class App extends React.Component {
 
 
 
-state ={
-  allShows: [],
-  bookmarked: [],
-  currentUser: []
-}
+  state ={
+    allShows: [],
+    bookmarked: [],
+    currentUser: []
+  }
 
-componentDidMount() {
-  this.fetchShows()
-}
+  componentDidMount() {
+    this.fetchShows()
+  }
 
 
-fetchShows = () =>{
-  return fetch("http://localhost:3000/api/v1/shows")
-  .then(response => response.json())
-  .then(shows =>{
-    this.setState({
-      allShows: shows
+  fetchShows = () =>{
+    return fetch("http://localhost:3000/api/v1/shows")
+    .then(response => response.json())
+    .then(shows =>{
+      this.setState({
+        allShows: shows
+      })
     })
-  })
-}
-//----------------------
-getShows = (data) =>{
-  this.setState({
-    allShows: data
-  })
-}
-
-currentUserHandler = (user) =>{
-  fetch("http://localhost:3000/api/v1/users/new",{
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accepts": "application/json"
-    },
-    body: JSON.stringify(user)
-  }).then (response =>response.json())
-  .then(user =>{
+  }
+  //----------------------
+  getShows = (data) =>{
     this.setState({
-      currentUser: user
+      allShows: data
     })
-  })
-}
+  }
+
+  currentUserHandler = (user) =>{
+    fetch("http://localhost:3000/api/v1/users/new",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify(user)
+    }).then (response =>response.json())
+    .then(user =>{
+      this.setState({
+        currentUser: user
+      })
+    })
+  }
 
 
   render(){
+    console.log(this.state.bookmarked)
+    console.log(this.state.currentUser)
 
     return (
       <div className="App">
@@ -83,28 +85,24 @@ currentUserHandler = (user) =>{
     );
   }
 
-bookmarkHandler = (show) =>{
+  bookmarkHandler = (show) =>{
 
-  fetch("http://localhost:3000/api/v1/bookmarks/new",{
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accepts": "application/json"
-    },
-    body: JSON.stringify({
-      show: show.id,
-      user: this.state.currentUser.id})
-  }).then (response =>response.json())
-
-
-//   this.setState(prevState => {
-// return {
-//   bookmarked: [show, ...prevState.bookmarked]
-// }
-//
-//   })
-
-}
+    fetch("http://localhost:3000/api/v1/bookmarks/new",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify({
+        show: show.id,
+        user: this.state.currentUser.id})
+      }).then (response =>response.json())
+      .then(bookmark =>{
+        this.setState({
+          bookmarked: [bookmark,...this.state.bookmarked]
+        })
+      })
+    }
 
 
 
@@ -112,6 +110,6 @@ bookmarkHandler = (show) =>{
 
 
 
-} //end of class
+  } //end of class
 
-export default App;
+  export default App;
