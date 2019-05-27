@@ -50,7 +50,7 @@ class Search extends Component {
         <h1>Hello From Search</h1>
 
         {sortedShows.map(show =>{
-          return <TvCard key={show.id} show={show} />
+          return <TvCard key={show.id} show={show} bookmarkHandler={this.props.bookmarkHandler} />
           })}
 
       </div>
