@@ -38,16 +38,29 @@ getShows = (data) =>{
 }
 
 currentUserHandler = (user) =>{
-
+  fetch("http://localhost:3000/api/v1/users/new",{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accepts": "application/json"
+    },
+    body: JSON.stringify(user)
+  }).then (response =>response.json())
+  .then(user =>{
+    this.setState({
+      currentUser: user
+    })
+  })
 }
 
 
   render(){
+
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <Splash />
+          <Splash currentUserHandler={this.currentUserHandler} />
           <Search getShows={this.getShows}
             allShows={this.state.allShows}
             bookmarkHandler={this.bookmarkHandler}
@@ -78,7 +91,9 @@ bookmarkHandler = (show) =>{
       "Content-Type": "application/json",
       "Accepts": "application/json"
     },
-    body: JSON.stringify(show)
+    body: JSON.stringify({
+      show: show.id,
+      user: this.state.currentUser.id})
   }).then (response =>response.json())
 
 
