@@ -12,10 +12,9 @@ class App extends React.Component {
 
 state ={
   allShows: [],
-  bookmarked:[]
+  bookmarked: [],
+  currentUser: []
 }
-
-
 
 componentDidMount() {
   this.fetchShows()
@@ -38,7 +37,9 @@ getShows = (data) =>{
   })
 }
 
+currentUserHandler = (user) =>{
 
+}
 
 
   render(){
@@ -46,8 +47,11 @@ getShows = (data) =>{
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <Search getShows={this.getShows} allShows={this.state.allShows} bookmarkHandler={this.bookmarkHandler} />
           <Splash />
+          <Search getShows={this.getShows}
+            allShows={this.state.allShows}
+            bookmarkHandler={this.bookmarkHandler}
+            />
           <UserHomepage />
           <Navbar />
           <p>
@@ -66,16 +70,32 @@ getShows = (data) =>{
     );
   }
 
-  bookmarkHandler = (show) =>{
+bookmarkHandler = (show) =>{
 
-    fetch("http://localhost:3000/api/v1/new",{
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accepts": "application/json"
-      },
-      body: JSON.stringify(show.id)
-    }).then (response =>response.json())
+  fetch("http://localhost:3000/api/v1/bookmarks/new",{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accepts": "application/json"
+    },
+    body: JSON.stringify(show)
+  }).then (response =>response.json())
+
+
+//   this.setState(prevState => {
+// return {
+//   bookmarked: [show, ...prevState.bookmarked]
+// }
+//
+//   })
+
+}
+
+
+
+
+
+
 
 } //end of class
 

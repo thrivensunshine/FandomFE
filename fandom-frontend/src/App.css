@@ -22,6 +22,17 @@
 .App-link {
   color: #61dafb;
 }
+.userButton{
+  background:#747674;
+  width: 15%;
+  padding: 4px 0;
+  left: 50%;
+  top: 50%;
+  border-radius: 3px;
+  color: white;
+  font-size: 30px;
+}
+
 
 @keyframes App-logo-spin {
   from {
