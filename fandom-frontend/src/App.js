@@ -30,10 +30,10 @@ fetchShows = () =>{
     })
   })
 }
-
+//----------------------
 getShows = (data) =>{
   this.setState({
-    shows: data
+    allShows: data
   })
 }
 

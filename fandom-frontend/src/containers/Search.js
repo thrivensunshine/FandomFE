@@ -38,8 +38,9 @@ class Search extends Component {
 
 
   render() {
-    let sortedShows = this.props.allShows.sort((a, b) => (a.name > b.name) ? 1 : -1)
-  
+  // let copyArr = [...this.props.allShows]
+  // let sortArr = copyArr.sort((a, b) => (a.name > b.name) ? 1 : -1)
+  let sortedShows = this.props.allShows.sort((a, b) => (a.name > b.name) ? 1 : -1)
     return (
       <div>
         <form onSubmit={this.submitHandler}>
