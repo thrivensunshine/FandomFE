@@ -4,7 +4,9 @@ class Splash extends Component {
 
   render() {
     return (
-      <div></div>
+      <div>
+      <h1>Hello From Splash</h1>
+    </div>
     );
   }
 
