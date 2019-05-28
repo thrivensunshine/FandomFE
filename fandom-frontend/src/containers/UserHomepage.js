@@ -20,7 +20,6 @@ console.log(this.props.bookmarks)
 
         <Navbar changePage={this.props.changePage}/>
 
-        <h1>Hello From UserHomepage</h1>
         <User currentUser={this.props.currentUser} />
           <button onClick={() => {
 

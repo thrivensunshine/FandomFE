@@ -36,13 +36,16 @@ class Search extends Component {
     let shows = this.state.search === "" ? sortedShows : this.props.filteredArr
 console.log(shows, "SHHHHOOOWWS")
     return (
-      <div>
+      <div >
         <Navbar changePage={this.props.changePage} />
+        <div className="searchForm">
+
         <h1>search by keyword</h1>
         <form onSubmit={this.submitHandler}>
-          <input type="text" name="search" value={this.state.search} onChange={this.changeStateHandler}/>
+          <input className="searchbar" type="text" name="search" value={this.state.search} onChange={this.changeStateHandler}/>
           <input type="submit"/>
         </form>
+        </div>
         <div className="grid">
         {shows.map(show =>{
             return <TvCard key={show.id} show={show} bookmarkHandler={this.props.bookmarkHandler}  />
