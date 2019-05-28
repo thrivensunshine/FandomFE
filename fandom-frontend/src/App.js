@@ -1,21 +1,25 @@
 import React from 'react';
+import logo from './logo.svg';
 import './App.css';
 import Search from "./containers/Search"
 import Splash from "./containers/Splash"
 import UserHomepage from "./containers/UserHomepage"
-// import Navbar from "./components/Navbar"
+import Navbar from "./components/Navbar"
 
 class App extends React.Component {
 
-  state ={
+
+
+   state ={
     allShows: [],
     bookmarked: [],
     currentUser: [],
-    filteredArr: [],
     page: "splash",
-    bookmarks: []
-  }
+    bookmarks: [],
+    filteredArr: []
 
+
+  }
   componentDidMount() {
     this.fetchShows()
   }
@@ -32,10 +36,12 @@ class App extends React.Component {
   }
 
   getShows = (searchTerm) =>{
+
     let allShowsCopy = [...this.state.allShows]
     let allShowsFiltered = allShowsCopy.filter(show =>{
       return  show.name.toLowerCase().includes(searchTerm.toLowerCase())
     })
+
     if (allShowsFiltered.length === 0){
       alert("No Search Results!")
     } else {
@@ -46,6 +52,12 @@ class App extends React.Component {
 
 
   }
+
+  // applyFilter = (searchTerm) => {
+  //   return this.state.allShows.filter(show => {
+  //     return show.name.toLowerCase().includes(searchTerm)
+  //   })
+  // }
 
   currentUserHandler = (user) =>{
     fetch("http://localhost:3000/api/v1/users/new",{
@@ -65,6 +77,7 @@ class App extends React.Component {
   }
 
   currentUserBookmark = (user) => {
+
     fetch("http://localhost:3000/api/v1/bookmarks/getit",{
       method: "POST",
       headers: {
@@ -76,64 +89,59 @@ class App extends React.Component {
     .then (bmarks =>{
       this.setState({
         bookmarks: bmarks
+
       })
+
     })
+
   }
-
-  //
-  // applyFilter = (searchTerm) => {
-  //   return this.state.allShows.filter(show => {
-  //     return show.name.toLowerCase().includes(searchTerm)
-  //   })
-  // }
-
-
 
   changePage = (newPage) => {
-    if (this.state.page !== newPage){
-      this.setState({page: newPage})
-    }
+  if (this.state.page !== newPage){
+    this.setState({page: newPage})
   }
+  
+}
 
-  renderPage(){
-    switch(this.state.page){
-      case "splash":
+renderPage(){
+switch(this.state.page){
+
+  case "splash":
       return  <Splash currentUserHandler={this.currentUserHandler} />
-      case "search":
-      return <Search
-        getShows={this.getShows}
-        filteredArr={this.state.filteredArr}
-        allShows={this.state.allShows}
-        bookmarkHandler={this.bookmarkHandler}
-        changePage={this.changePage}
-        page={this.state.page}
-        fetchShows={this.fetchShows}
-        />
-      case "userHome":
-      return <UserHomepage page={this.state.page}
+  case "search":
+    return <Search getShows={this.getShows}
+      allShows={this.state.allShows}
+      filteredArr={this.state.filteredArr}
+       bookmarkHandler={this.bookmarkHandler}
+       fetchShows={this.fetchShows}
+       changePage={this.changePage}
+       page={this.state.page}
+      />
+    case "userHome":
+    return <UserHomepage page={this.state.page}
         changePage={this.changePage}
         currentUser={this.state.currentUser}
         currentUserBookmark={this.currentUserBookmark}
         bookmarks={this.state.bookmarks} />
 
-      default:
-      return <Splash />
-    }
-  }
+  default:
+    return <Splash />
+}
+}
 
+render(){
 
-  render(){
-    return (
-      <div>
+  return (
+    <div>
         {this.renderPage()}
-      </div>
-    );
-  }
-
+    </div>
+  );
+}
 
 
 
   bookmarkHandler = (show) =>{
+
     fetch("http://localhost:3000/api/v1/bookmarks/new",{
       method: "POST",
       headers: {
@@ -149,6 +157,7 @@ class App extends React.Component {
           bookmarked: [bookmark,...this.state.bookmarked]
         })
       })
+
     }
 
 
@@ -158,6 +167,5 @@ class App extends React.Component {
 
 
   } //end of class
-
 
   export default App;

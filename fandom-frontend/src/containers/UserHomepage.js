@@ -1,40 +1,30 @@
 import React, { Component } from 'react';
 import User from "../components/User"
 import Navbar from '../components/Navbar'
+import FavoritesCard from '../components/FavoritesCard'
 
 class UserHomepage extends Component {
 
 
-  state = {
-    page: "userHome"
-  }
-
 
   render() {
+    console.log(this.props.bookmarks)
     return (
       <div>
-
-
-
-
-
-
-        <Navbar changePage={this.props.changePage}/>
-
-        <h1>Hello From UserHomepage</h1>
+        <Navbar changePage={this.props.changePage} />
         <User currentUser={this.props.currentUser} />
-        <button onClick={() => {
+       {this.props.bookmarks.length === 0 ? null :
+          <button onClick={() => {
             this.props.currentUserBookmark(this.props.currentUser)
-          }}>Show my Favs!!</button>
-          <div>
-            {this.props.bookmarks.map(hey =>{
-              console.log(hey)
-            })}
-          </div>
-        </div>
-      );
-    }
+          }}> Show my Favs!! </button>}
+      {this.props.bookmarks.map(bmk =>{
+        return <FavoritesCard key={bmk.id} bookmark={bmk} />
+      })}
 
-  }//end of component
+  </div>
+    );
+  }
 
-  export default UserHomepage;
+}
+
+export default UserHomepage

@@ -1,11 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Barlow&display=swap');
+
+
+body{
+  background-color: black;
+  color: white;
+  font-family: 'Barlow', sans-serif;
+}
+
+
 .App {
   text-align: center;
 }
-
+.searchbar{
+  width: 20%;
+}
+.searchForm{
+font-size: 20px;
+position: relative;
+text-align: center;
+border-style: double;
+}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
+}
+.grid{
+display: inline-grid;
+grid-template-columns: 3fr 3fr 3fr 3fr;
+grid-gap: 3px;
+align-items: center;
+padding-left: 8%;
 }
 
 .App-header {
@@ -32,15 +57,13 @@
   color: white;
   font-size: 30px;
 }
-
-<<<<<<< HEAD
-ul {
-  columns: 3;
-  -webkit-columns: 3;
-  -moz-columns: 3;
+.buttons{
+  /* position: absolute; */
+padding-left: 1%;
+align-items: center;
+align-content: center;
 }
 
-=======
 .grid{
 display: inline-grid;
 grid-template-columns: 3fr 3fr 3fr 3fr;
@@ -68,8 +91,17 @@ height: 100px;
 
 border-radius: 3px;
 }
->>>>>>> master
 
+.Navbutton{
+  background: black;
+  width: 33%;
+  padding: 4px 0;
+  left: 50%;
+  top: 50%;
+  border-radius: 3px;
+  color: white;
+  font-size: 30px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
