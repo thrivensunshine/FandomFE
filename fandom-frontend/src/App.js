@@ -1,20 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Search from "./containers/Search"
 import Splash from "./containers/Splash"
 import UserHomepage from "./containers/UserHomepage"
-import Navbar from "./components/Navbar"
+// import Navbar from "./components/Navbar"
 
 class App extends React.Component {
-
-
 
   state ={
     allShows: [],
     bookmarked: [],
     currentUser: [],
-    filteredArr: []
+    filteredArr: [],
+    page: "splash",
+    bookmarks: []
   }
 
   componentDidMount() {
@@ -33,12 +32,10 @@ class App extends React.Component {
   }
 
   getShows = (searchTerm) =>{
-
     let allShowsCopy = [...this.state.allShows]
     let allShowsFiltered = allShowsCopy.filter(show =>{
       return  show.name.toLowerCase().includes(searchTerm.toLowerCase())
     })
-
     if (allShowsFiltered.length === 0){
       alert("No Search Results!")
     } else {
@@ -48,12 +45,6 @@ class App extends React.Component {
     }
 
 
-  }
-
-  applyFilter = (searchTerm) => {
-    return this.state.allShows.filter(show => {
-      return show.name.toLowerCase().includes(searchTerm)
-    })
   }
 
   currentUserHandler = (user) =>{
@@ -67,49 +58,82 @@ class App extends React.Component {
     }).then (response =>response.json())
     .then(user =>{
       this.setState({
-        currentUser: user
+        currentUser: user,
+        page:"userHome"
       })
     })
   }
 
+  currentUserBookmark = (user) => {
+    fetch("http://localhost:3000/api/v1/bookmarks/getit",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify(user)
+    }).then (response =>response.json())
+    .then (bmarks =>{
+      this.setState({
+        bookmarks: bmarks
+      })
+    })
+  }
+
+  //
+  // applyFilter = (searchTerm) => {
+  //   return this.state.allShows.filter(show => {
+  //     return show.name.toLowerCase().includes(searchTerm)
+  //   })
+  // }
+
+
+
+  changePage = (newPage) => {
+    if (this.state.page !== newPage){
+      this.setState({page: newPage})
+    }
+  }
+
+  renderPage(){
+    switch(this.state.page){
+      case "splash":
+      return  <Splash currentUserHandler={this.currentUserHandler} />
+      case "search":
+      return <Search
+        getShows={this.getShows}
+        filteredArr={this.state.filteredArr}
+        allShows={this.state.allShows}
+        bookmarkHandler={this.bookmarkHandler}
+        changePage={this.changePage}
+        page={this.state.page}
+        fetchShows={this.fetchShows}
+        />
+      case "userHome":
+      return <UserHomepage page={this.state.page}
+        changePage={this.changePage}
+        currentUser={this.state.currentUser}
+        currentUserBookmark={this.currentUserBookmark}
+        bookmarks={this.state.bookmarks} />
+
+      default:
+      return <Splash />
+    }
+  }
+
 
   render(){
-
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <Splash currentUserHandler={this.currentUserHandler} />
-          <UserHomepage currentUser={this.state.currentUser} />
-
-          <Search
-            getShows={this.getShows}
-            filteredArr={this.state.filteredArr}
-            allShows={this.state.allShows}
-            bookmarkHandler={this.bookmarkHandler}
-            fetchShows={this.fetchShows}
-            />
-          <Navbar />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            >
-            Learn React
-          </a>
-        </header>
+      <div>
+        {this.renderPage()}
       </div>
     );
   }
 
 
 
-  bookmarkHandler = (show) =>{
 
+  bookmarkHandler = (show) =>{
     fetch("http://localhost:3000/api/v1/bookmarks/new",{
       method: "POST",
       headers: {
@@ -125,7 +149,6 @@ class App extends React.Component {
           bookmarked: [bookmark,...this.state.bookmarked]
         })
       })
-
     }
 
 
@@ -135,5 +158,6 @@ class App extends React.Component {
 
 
   } //end of class
+
 
   export default App;

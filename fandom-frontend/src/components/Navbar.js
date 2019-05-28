@@ -1,12 +1,20 @@
 import React from 'react';
 
-
-const Navbar = (props) => {
+const NavBAr = (props) => {
+    console.log(props)
 return (
 
-  <div>
-    <h1>Hello from navbar</h1>
+  <div className="buttons">
+  <button className="button" onClick={() => {
+    props.changePage("search")
+  }}>Search for a show</button>
+  <button className="button" onClick={() => {
+    props.changePage("userHome")
+  }}>back to me!</button>
+  <button className="button" onClick={() => {
+    props.changePage("splash")
+  }}>signout</button>
   </div>
 );
 }
-export default Navbar
+export default NavBAr;
