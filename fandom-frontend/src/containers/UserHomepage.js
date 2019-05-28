@@ -3,11 +3,15 @@ import User from "../components/User"
 
 class UserHomepage extends Component {
 
+
+
+
   render() {
     return (
       <div>
-        <h1>Hello From UserHomepage</h1>
-        <User />
+        <img src={this.props.currentUser["avatar"]} alt={this.props.currentUser["name"]} height="300" width="300" />
+        <h1>{this.props.currentUser["name"]}</h1>
+
       </div>
     );
   }

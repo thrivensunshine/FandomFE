@@ -27,7 +27,9 @@ class Search extends Component {
       body: JSON.stringify(this.state)
     }).then (response =>response.json())
     .then(data =>{
-      this.props.getShows(data)
+      if (!data.error) {
+        this.props.getShows(data)
+      }
     })
   }
 //--------------------------^^this is search bar stuff^^-------------------
@@ -43,6 +45,7 @@ class Search extends Component {
   let sortedShows = this.props.allShows.sort((a, b) => (a.name > b.name) ? 1 : -1)
     return (
       <div>
+        <h1>search by keyword</h1>
         <form onSubmit={this.submitHandler}>
           <input type="text" name="search" value={this.state.search} onChange={this.changeStateHandler}/>
           <input type="submit"/>
@@ -50,7 +53,7 @@ class Search extends Component {
         <h1>Hello From Search</h1>
 
         {sortedShows.map(show =>{
-          return <TvCard key={show.id} show={show} bookmarkHandler={this.props.bookmarkHandler} />
+          return <TvCard key={show.id} show={show} bookmarkHandler={this.props.bookmarkHandler}  /> 
           })}
 
       </div>

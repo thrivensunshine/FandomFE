@@ -63,11 +63,11 @@ class App extends React.Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <Splash currentUserHandler={this.currentUserHandler} />
+          <UserHomepage currentUser={this.state.currentUser} />
           <Search getShows={this.getShows}
             allShows={this.state.allShows}
             bookmarkHandler={this.bookmarkHandler}
             />
-          <UserHomepage />
           <Navbar />
           <p>
             Edit <code>src/App.js</code> and save to reload.
@@ -85,8 +85,14 @@ class App extends React.Component {
     );
   }
 
-  bookmarkHandler = (show) =>{
+  // isAlreadyAdded = (id) => {
+  //   // return true or false if id is inside the state of bookmarked
+  // }
 
+  bookmarkHandler = (show) =>{
+// if (this.isAlreadyAdded(show.id)){
+//   alert("You Have Already Bookmarked, This Calmn Down!")
+// } else{
     fetch("http://localhost:3000/api/v1/bookmarks/new",{
       method: "POST",
       headers: {
@@ -102,6 +108,7 @@ class App extends React.Component {
           bookmarked: [bookmark,...this.state.bookmarked]
         })
       })
+    // }
     }
 
 

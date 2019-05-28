@@ -33,6 +33,12 @@
   font-size: 30px;
 }
 
+ul {
+  columns: 3;
+  -webkit-columns: 3;
+  -moz-columns: 3;
+}
+
 
 @keyframes App-logo-spin {
   from {
