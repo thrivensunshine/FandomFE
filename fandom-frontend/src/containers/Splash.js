@@ -14,7 +14,7 @@ class Splash extends Component {
 
 state={
 name: "",
-avatar: "",
+avatar: ""
 }
 
 

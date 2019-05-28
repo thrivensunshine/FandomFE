@@ -14,7 +14,9 @@ state ={
   allShows: [],
   bookmarked: [],
   currentUser: [],
-  page: "splash"
+  page: "splash",
+  bookmarks: []
+
 }
 
 componentDidMount() {
@@ -55,6 +57,25 @@ currentUserHandler = (user) =>{
   })
 }
 
+currentUserBookmark = (user) => {
+  fetch("http://localhost:3000/api/v1/bookmarks/getit",{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accepts": "application/json"
+    },
+    body: JSON.stringify(user)
+  }).then (response =>response.json())
+  .then (bmarks =>{
+    this.setState({
+      bookmarks: bmarks
+
+    }, () => console.log(this.state.bookmarks, "these are bokosihgosgoirg"))
+
+  })
+
+}
+
 changePage = (newPage) => {
   if (this.state.page !== newPage){
     this.setState({page: newPage})
@@ -75,7 +96,11 @@ switch(this.state.page){
        page={this.state.page}
       />
     case "userHome":
-    return <UserHomepage page={this.state.page} changePage={this.changePage} user={this.state.currentUser} />
+    return <UserHomepage page={this.state.page}
+        changePage={this.changePage}
+        currentUser={this.state.currentUser}
+        currentUserBookmark={this.currentUserBookmark}
+        bookmarks={this.state.bookmarks} />
 
   default:
     return <Splash />

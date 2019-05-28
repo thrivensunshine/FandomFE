@@ -9,11 +9,26 @@ class UserHomepage extends Component {
   }
 
   render() {
+console.log(this.props.bookmarks)
+
+
     return (
+
+
       <div>
+
         <Navbar changePage={this.props.changePage}/>
+
         <h1>Hello From UserHomepage</h1>
-        <User />
+        <User currentUser={this.props.currentUser} />
+          <button onClick={() => {
+            this.props.currentUserBookmark(this.props.currentUser)
+          }}>Show my Favs!!</button>
+      <div>
+        {this.props.bookmarks.map(hey =>{
+          console.log(hey)
+        })}
+      </div>
       </div>
     );
   }
