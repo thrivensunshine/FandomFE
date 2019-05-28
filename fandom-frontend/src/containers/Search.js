@@ -19,39 +19,20 @@ class Search extends Component {
   submitHandler = (event) =>{
     event.preventDefault()
 
-
-
-
-
-
-    // fetch("http://localhost:3000/api/v1/search",{
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Accepts": "application/json"
-    //   },
-    //   body: JSON.stringify(this.state)
-    // }).then (response =>response.json())
-    // .then(data =>{
-    //   if (!data.error) {
-    //     this.props.getShows(data)
-    //   }
-    // })
   }
-//--------------------------^^this is search bar stuff^^-------------------
 
+  
 
 
 
 
 
   render() {
-  // let copyArr = [...this.props.allShows]
-  // let sortArr = copyArr.sort((a, b) => (a.name > b.name) ? 1 : -1)
-  let sortedShows = this.props.allShows.sort((a, b) => (a.name > b.name) ? 1 : -1)
-  console.log("testing", this.state.search)
-  let shows = this.state.search === "" ? sortedShows : this.props.filteredArr
-  
+
+    let sortedShows = this.props.allShows.sort((a, b) => (a.name > b.name) ? 1 : -1)
+
+    let shows = this.state.search === "" ? sortedShows : this.props.filteredArr
+
     return (
       <div>
         <h1>search by keyword</h1>

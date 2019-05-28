@@ -31,32 +31,22 @@ class App extends React.Component {
       })
     })
   }
-  //----------------------
+
   getShows = (searchTerm) =>{
-    // console.log("SEARCH TERM", searchTerm)
+
     let allShowsCopy = [...this.state.allShows]
     let allShowsFiltered = allShowsCopy.filter(show =>{
       return  show.name.toLowerCase().includes(searchTerm.toLowerCase())
     })
-    console.log(allShowsFiltered)
-     if (allShowsFiltered.length === 0){
-       alert("No Search Results!")
-     } else {
-         this.setState({
-         filteredArr: allShowsFiltered
-         })
-     }
 
+    if (allShowsFiltered.length === 0){
+      alert("No Search Results!")
+    } else {
+      this.setState({
+        filteredArr: allShowsFiltered
+      })
+    }
 
-    // if (allShowsCopy.filter(show =>
-    //    return this.state.allShows.include(searchTerm) ){
-    //
-    //   this.setState({
-    //     allShows: allShowsCopy
-    //   })
-    // } else {
-    //   alert("No Search Results!")
-    // }
 
   }
 
@@ -84,8 +74,6 @@ class App extends React.Component {
 
 
   render(){
-    console.log(this.state.bookmarked)
-    console.log(this.state.currentUser)
 
     return (
       <div className="App">
@@ -118,14 +106,10 @@ class App extends React.Component {
     );
   }
 
-  // isAlreadyAdded = (id) => {
-  //   // return true or false if id is inside the state of bookmarked
-  // }
+
 
   bookmarkHandler = (show) =>{
-// if (this.isAlreadyAdded(show.id)){
-//   alert("You Have Already Bookmarked, This Calmn Down!")
-// } else{
+
     fetch("http://localhost:3000/api/v1/bookmarks/new",{
       method: "POST",
       headers: {
@@ -141,7 +125,7 @@ class App extends React.Component {
           bookmarked: [bookmark,...this.state.bookmarked]
         })
       })
-    // }
+
     }
 
 
