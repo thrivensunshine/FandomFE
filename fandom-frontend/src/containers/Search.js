@@ -11,26 +11,32 @@ class Search extends Component {
 
   changeStateHandler = (event) => {
     this.setState({
-      [event.target.name]: [event.target.value]
-    })
+      [event.target.name]: event.target.value
+    }, () => {this.props.getShows(this.state.search)})
+
   }
 
   submitHandler = (event) =>{
     event.preventDefault()
 
-    fetch("http://localhost:3000/api/v1/search",{
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accepts": "application/json"
-      },
-      body: JSON.stringify(this.state)
-    }).then (response =>response.json())
-    .then(data =>{
-      if (!data.error) {
-        this.props.getShows(data)
-      }
-    })
+
+
+
+
+
+    // fetch("http://localhost:3000/api/v1/search",{
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Accepts": "application/json"
+    //   },
+    //   body: JSON.stringify(this.state)
+    // }).then (response =>response.json())
+    // .then(data =>{
+    //   if (!data.error) {
+    //     this.props.getShows(data)
+    //   }
+    // })
   }
 //--------------------------^^this is search bar stuff^^-------------------
 
@@ -43,6 +49,9 @@ class Search extends Component {
   // let copyArr = [...this.props.allShows]
   // let sortArr = copyArr.sort((a, b) => (a.name > b.name) ? 1 : -1)
   let sortedShows = this.props.allShows.sort((a, b) => (a.name > b.name) ? 1 : -1)
+  console.log("testing", this.state.search)
+  let shows = this.state.search === "" ? sortedShows : this.props.filteredArr
+  
     return (
       <div>
         <h1>search by keyword</h1>
@@ -51,10 +60,11 @@ class Search extends Component {
           <input type="submit"/>
         </form>
         <h1>Hello From Search</h1>
-
-        {sortedShows.map(show =>{
-          return <TvCard key={show.id} show={show} bookmarkHandler={this.props.bookmarkHandler}  /> 
-          })}
+        {
+          shows.map(show =>{
+            return <TvCard key={show.id} show={show} bookmarkHandler={this.props.bookmarkHandler}  />
+          })
+        }
 
       </div>
     );
