@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import TvCard from "../components/TvCard"
 import Bookmarks from "./Bookmarks"
-
+import Navbar from "../components/Navbar"
 class Search extends Component {
 
   state={
-    search: ""
+    search: "",
+    page: "search"
+
   }
 
 
@@ -43,6 +45,7 @@ class Search extends Component {
   let sortedShows = this.props.allShows.sort((a, b) => (a.name > b.name) ? 1 : -1)
     return (
       <div>
+        <Navbar changePage={this.props.changePage} />
         <form onSubmit={this.submitHandler}>
           <input type="text" name="search" value={this.state.search} onChange={this.changeStateHandler}/>
           <input type="submit"/>

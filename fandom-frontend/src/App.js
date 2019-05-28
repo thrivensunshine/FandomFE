@@ -4,7 +4,7 @@ import './App.css';
 import Search from "./containers/Search"
 import Splash from "./containers/Splash"
 import UserHomepage from "./containers/UserHomepage"
-import Navbar from "./components/Navbar"
+// import Navbar from "./components/Navbar"
 
 class App extends React.Component {
 
@@ -13,7 +13,8 @@ class App extends React.Component {
 state ={
   allShows: [],
   bookmarked: [],
-  currentUser: []
+  currentUser: [],
+  page: "splash"
 }
 
 componentDidMount() {
@@ -38,34 +39,62 @@ getShows = (data) =>{
 }
 
 currentUserHandler = (user) =>{
+  fetch("http://localhost:3000/api/v1/users/new",{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accepts": "application/json"
+    },
+    body: JSON.stringify(user)
+  }).then (response =>response.json())
+  .then(user =>{
+    this.setState({
+      currentUser: user,
+      page:"userHome"
+    })
+  })
+}
 
+changePage = (newPage) => {
+  if (this.state.page !== newPage){
+    this.setState({page: newPage})
+  }
+  console.log(this.state.page)
+}
+
+renderPage(){
+switch(this.state.page){
+
+  case "splash":
+      return  <Splash currentUserHandler={this.currentUserHandler} />
+  case "search":
+    return <Search getShows={this.getShows}
+      allShows={this.state.allShows}
+       bookmarkHandler={this.bookmarkHandler}
+       changePage={this.changePage}
+       page={this.state.page}
+      />
+    case "userHome":
+    return <UserHomepage page={this.state.page} changePage={this.changePage} user={this.state.currentUser} />
+
+  default:
+    return <Splash />
+}
 }
 
 
   render(){
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <Splash />
-          <Search getShows={this.getShows}
-            allShows={this.state.allShows}
-            bookmarkHandler={this.bookmarkHandler}
-            />
-          <UserHomepage />
-          <Navbar />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            >
-            Learn React
-          </a>
-        </header>
+      <div>
+          {this.renderPage()}
+
+
+
+
+
+
+
       </div>
     );
   }
@@ -78,16 +107,15 @@ bookmarkHandler = (show) =>{
       "Content-Type": "application/json",
       "Accepts": "application/json"
     },
-    body: JSON.stringify(show)
+    body: JSON.stringify({
+      show: show.id,
+      user: this.state.currentUser.id})
   }).then (response =>response.json())
-
-
-//   this.setState(prevState => {
-// return {
-//   bookmarked: [show, ...prevState.bookmarked]
-// }
-//
-//   })
+  .then(bookmark=>{
+    this.setState({
+      bookmarked: [bookmark, ...this.state.bookmarked]
+    })
+  })
 
 }
 
@@ -100,3 +128,17 @@ bookmarkHandler = (show) =>{
 } //end of class
 
 export default App;
+
+
+
+// _______________________________________________
+//
+//
+// <Search getShows={this.getShows}
+//   allShows={this.state.allShows}
+//   bookmarkHandler={this.bookmarkHandler}
+//   />
+//
+// <UserHomepage />
+// <Navbar />
+//
