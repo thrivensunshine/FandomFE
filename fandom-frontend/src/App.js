@@ -1,10 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 import Search from "./containers/Search"
 import Splash from "./containers/Splash"
 import UserHomepage from "./containers/UserHomepage"
-import Navbar from "./components/Navbar"
+// import Navbar from "./components/Navbar"
 
 class App extends React.Component {
 

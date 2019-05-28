@@ -37,7 +37,7 @@ class TvCard extends Component {
             <div onClick={this.clickHandler}>
               <img src={this.props.show.img_url} alt={this.props.show.name} width="500" height="600"/>
             </div>
-            <button className="userButton" onClick={() => this.bookmarkButton(this.props.show)}>Bookmark</button>
+            <button className="userButton" onClick={() => this.bookmarkButton(this.props.show)}>Bookmark <span role="img">📺 </span></button>
           </div>
         }
     </div>
