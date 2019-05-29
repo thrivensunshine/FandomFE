@@ -4,7 +4,7 @@ import './App.css';
 import Search from "./containers/Search"
 import Splash from "./containers/Splash"
 import UserHomepage from "./containers/UserHomepage"
-// import Navbar from "./components/Navbar"
+
 
 class App extends React.Component {
 
@@ -55,11 +55,27 @@ class App extends React.Component {
 
   }
 
-  // applyFilter = (searchTerm) => {
-  //   return this.state.allShows.filter(show => {
-  //     return show.name.toLowerCase().includes(searchTerm)
-  //   })
-  // }
+  updateCurrentUser = (newAvatar) =>{
+    let userID = this.state.currentUser.id
+    let user = this.state.currentUser
+
+
+    fetch(`http://localhost:3000/api/v1/users/${userID}`,{
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json"
+      },
+      body: JSON.stringify({newAvatar})
+    }).then(response => response.json())
+    let updateUser = {id: user.id, name: user.name, avatar: newAvatar}
+    this.setState({
+
+      currentUser: updateUser
+
+    })
+
+  }
 
   currentUserHandler = (user) =>{
     fetch("http://localhost:3000/api/v1/users/new",{
@@ -130,7 +146,8 @@ switch(this.state.page){
         changePage={this.changePage}
         currentUser={this.state.currentUser}
         currentUserBookmark={this.currentUserBookmark}
-        bookmarks={this.state.bookmarks} />
+        bookmarks={this.state.bookmarks}
+        updateCurrentUser={this.updateCurrentUser} />
 
   default:
     return <Splash />

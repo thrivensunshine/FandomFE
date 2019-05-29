@@ -9,9 +9,9 @@ import Favorite from '../components/Favorites'
 class UserHomepage extends Component {
 
 state={
-
-clicked: false
-
+clicked: false,
+url: "",
+avatarForm: false
 }
 
 
@@ -20,8 +20,31 @@ clickHandler = () =>{
  this.setState(prevState => ({
    clicked: !prevState.clicked
  }))
-
 }
+
+
+avatarFormChange = () =>{
+  this.setState(prevState =>({
+    avatarForm: !prevState.avatarForm
+  }),() => console.log("hey there from form change"))
+}
+
+handleSubmit = (event) =>{
+  event.preventDefault()
+this.props.updateCurrentUser(this.state.url)
+}
+
+handleChange = (event) =>{
+  this.setState({
+
+[event.target.name]: event.target.value
+
+},() => console.log(this.state.url))
+}
+
+
+
+
 
   render() {
 
@@ -29,15 +52,28 @@ clickHandler = () =>{
       <div>
         <Navbar changePage={this.props.changePage}/>
         <User currentUser={this.props.currentUser} />
+        <button className="favbut" onClick={this.avatarFormChange}>Change My Avatar</button>
+<div>
+  {this.state.avatarForm ?
+<form onSubmit={this.handleSubmit}>
+  <input type="text" onChange={this.handleChange} value={this.state.url} name="url"/>
+  <input type="submit"/>
+</form>
+:
+null
+}
+</div>
+
+
         <button className="favbut" onClick={this.clickHandler}>{this.props.currentUser.name}'s Favorites!!</button>
           <br />
           <br />
           <div className="grid" >
             { this.state.clicked ?
             this.props.bookmarks.map(bmark =>{
-              return  <div className="favs">
-                  <Favorite key={bmark.id} bmark={bmark} />
-                </div>})
+            return  <Favorite key={bmark.id}  bmark={bmark} />
+
+            })
               :
               null
 
