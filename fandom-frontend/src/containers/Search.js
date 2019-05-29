@@ -26,7 +26,7 @@ class Search extends Component {
     let sortedShows = this.props.allShows.sort((a, b) => (a.name > b.name) ? 1 : -1)
 
     let shows = this.state.search === "" ? sortedShows : this.props.filteredArr
-console.log(shows, "SHHHHOOOWWS")
+
     return (
       <div >
         <Navbar changePage={this.props.changePage} />

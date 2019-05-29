@@ -66,10 +66,48 @@ padding-left: 1%;
 align-items: center;
 align-content: center;
 align-items: center;
+position: sticky;
+top:0;
+z-index:  1;
+
 }
 
+.favbut {
+  /* animation: App-logo-spin infinite 15s linear; */
+  text-align: center;
+  background:#282c34;
+  width: 20%;
+  padding: 4px 0;
+  left: 50%;
+  top: 50%;
+  border-radius: 3px;
+  color: white;
+  font-size: 30px;
+  align-items: center;
+  align-content: center;
+  left: 50%;
+}
+
+.aye{
+  position: relative;
+  text-align: center;
+  border-style: double;
+  animation-duration: 2s;
+  animation-name: slidein;
+}
+
+.Navbutton{
+  background: black;
+  width: 33%;
+  padding: 4px 0;
+  left: 50;
+  top: 50%;
+  border-radius: 3px;
+  color: white;
+  font-size: 30px;
+}
 .userPic{
-  animation: App-logo-spin infinite 20s linear;
+
   position: absolute;
   align-items: center;
   border-style: double;
@@ -94,48 +132,37 @@ padding-left: 8%;
   background-color: black
 }
 .signin{
-  position: absolute;
+position: absolute;
 margin: auto;
 top: 0;
 right: 0;
 bottom: 0;
 left: 0;
-width: 100px;
-height: 100px;
-
+padding: 0;
+width: 150px;
+height: 60px;
+font-size: 25px;
 border-radius: 3px;
 }
 
-.favbut {
-  text-align: center;
-  background:#282c34;
-  width: 20%;
-  padding: 4px 0;
-  left: 50%;
-  top: 50%;
-  border-radius: 3px;
-  color: white;
-  font-size: 30px;
-  align-items: center;
-  align-content: center;
-  left: 50%;
-}
-
-.Navbutton{
-  background: black;
-  width: 33%;
-  padding: 4px 0;
-  left: 50%;
-  top: 50%;
-  border-radius: 3px;
-  color: white;
-  font-size: 30px;
-}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
   }
 }

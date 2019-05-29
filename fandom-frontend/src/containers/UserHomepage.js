@@ -22,9 +22,11 @@ console.log(this.props.bookmarks)
         <Navbar changePage={this.props.changePage}/>
 
         <User currentUser={this.props.currentUser} />
+        <div className="aye">
           <button className="favbut" onClick={() => {
             this.props.currentUserBookmark(this.props.currentUser)
           }}>Show my Favs!!</button>
+          </div>
         <br />
         <br />
         <div className="grid" >
@@ -36,7 +38,7 @@ console.log(this.props.bookmarks)
           </div>
 
         )
-          
+
         })}
       </div>
       </div>

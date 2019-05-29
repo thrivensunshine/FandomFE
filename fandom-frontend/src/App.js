@@ -1,4 +1,5 @@
 import React from 'react';
+import swal from 'sweetalert';
 
 import './App.css';
 import Search from "./containers/Search"
@@ -43,7 +44,7 @@ class App extends React.Component {
     })
 
     if (allShowsFiltered.length === 0){
-      alert("No Search Results!")
+        swal("Sorry, show not found!");
     } else {
       this.setState({
         filteredArr: allShowsFiltered

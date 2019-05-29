@@ -17,7 +17,6 @@ class TvCard extends Component {
 
 
   bookmarkButton = (show) =>{
-
     this.props.bookmarkHandler(show)
 }
 
