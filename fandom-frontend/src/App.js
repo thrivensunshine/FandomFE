@@ -1,10 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 import Search from "./containers/Search"
 import Splash from "./containers/Splash"
 import UserHomepage from "./containers/UserHomepage"
-import Navbar from "./components/Navbar"
+// import Navbar from "./components/Navbar"
 
 class App extends React.Component {
 
@@ -16,10 +16,12 @@ class App extends React.Component {
     currentUser: [],
     page: "splash",
     bookmarks: [],
-    filteredArr: []
-
-
+    filteredArr: [],
+    showFav: false
   }
+
+
+
   componentDidMount() {
     this.fetchShows()
   }
@@ -76,8 +78,9 @@ class App extends React.Component {
     })
   }
 
-  currentUserBookmark = (user) => {
-
+  currentUserBookmark = () => {
+let user = this.state.currentUser
+console.log(user)
     fetch("http://localhost:3000/api/v1/bookmarks/getit",{
       method: "POST",
       headers: {
@@ -89,18 +92,22 @@ class App extends React.Component {
     .then (bmarks =>{
       this.setState({
         bookmarks: bmarks
-
       })
-
     })
-
   }
+
+
+
+
+
+
+
 
   changePage = (newPage) => {
   if (this.state.page !== newPage){
     this.setState({page: newPage})
   }
-  
+
 }
 
 renderPage(){
@@ -116,6 +123,7 @@ switch(this.state.page){
        fetchShows={this.fetchShows}
        changePage={this.changePage}
        page={this.state.page}
+       bookmarks={this.state.bookmarks}
       />
     case "userHome":
     return <UserHomepage page={this.state.page}

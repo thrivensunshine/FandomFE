@@ -18,7 +18,18 @@ class TvCard extends Component {
 
   bookmarkButton = (show) =>{
 
-    this.props.bookmarkHandler(show)
+
+//     console.log(this.props.bookmarks,"i'm here")
+//     let copyArr = [...this.props.bookmarks]
+//     let newArr = copyArr.filter(x =>{
+//     return  x.id === show.id
+//   })
+// {newArr > 0 ?
+// alert("Already Bookmarked")
+// :
+this.props.bookmarkHandler(show)
+
+// }
 }
 
 
@@ -37,7 +48,11 @@ class TvCard extends Component {
             <div onClick={this.clickHandler}>
               <img src={this.props.show.img_url} alt={this.props.show.name} width="500" height="600"/>
             </div>
-            <button className="userButton" onClick={() => this.bookmarkButton(this.props.show)}>Bookmark</button>
+            //--------------------------VVVthe div to go ontop of the pictureVVV--------------
+            <div>
+
+            <button className="userButton" onClick={() => this.bookmarkButton(this.props.show)}>Favorite<span role="img">📺 </span></button>
+          </div>
           </div>
         }
     </div>

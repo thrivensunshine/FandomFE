@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 
-import App from '../App.css';
-import Search from "../containers/Search"
-
-import UserHomepage from "../containers/UserHomepage"
-import Navbar from "../components/Navbar"
+// import App from '../App.css';
+// import Search from "../containers/Search"
+//
+// import UserHomepage from "../containers/UserHomepage"
+// import Navbar from "../components/Navbar"
 
 
 class Splash extends Component {
@@ -48,7 +48,7 @@ changePage = (newPage) => {
         <img className="splashimage" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/SMPTE_Color_Bars.svg/1200px-SMPTE_Color_Bars.svg.png" alt="" />
         <div className="signin">
         <form className="form" onSubmit={this.handleSubmit}
-         className="form">
+         >
           <h3>name</h3>
           <input type="text" value={this.state.name} name="name" onChange={this.handleChange} />
           <h3>avatar url</h3>

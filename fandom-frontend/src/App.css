@@ -21,7 +21,7 @@ text-align: center;
 border-style: double;
 }
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
+
   height: 40vmin;
   pointer-events: none;
 }
@@ -48,14 +48,24 @@ padding-left: 8%;
   color: #61dafb;
 }
 .userButton{
-  background:#747674;
-  width: 15%;
+  background:#282c34;
+  width: 100%;
   padding: 4px 0;
   left: 50%;
   top: 50%;
   border-radius: 3px;
   color: white;
   font-size: 30px;
+  align-items: center;
+  align-content: center;
+  left: 50%;
+}
+.buttons{
+  /* position: absolute; */
+padding-left: 1%;
+align-items: center;
+align-content: center;
+align-items: center;
 }
 .buttons{
   /* position: absolute; */
@@ -64,14 +74,24 @@ align-items: center;
 align-content: center;
 }
 
+.userPic{
+  animation: App-logo-spin infinite 20s linear;
+  position: absolute;
+  align-items: center;
+  border-style: double;
+}
 .grid{
 display: inline-grid;
 grid-template-columns: 3fr 3fr 3fr 3fr;
-grid-gap: 3px;
+grid-gap: 80px;
 align-items: center;
 padding-left: 8%;
 }
 
+.favs{
+
+  align-content: center
+}
 .splashimage{
   height: 90%;
   width: 90%
@@ -91,6 +111,23 @@ height: 100px;
 
 border-radius: 3px;
 }
+
+
+.favbut {
+  text-align: center;
+  background:#282c34;
+  width: 20%;
+  padding: 4px 0;
+  left: 50%;
+  top: 50%;
+  border-radius: 3px;
+  color: white;
+  font-size: 30px;
+  align-items: center;
+  align-content: center;
+  left: 50%;
+}
+
 
 .Navbutton{
   background: black;
