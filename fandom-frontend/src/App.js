@@ -86,15 +86,29 @@ class App extends React.Component {
       },
       body: JSON.stringify(user)
     }).then (response =>response.json())
-    .then (bmarks =>{
+    .then (bmarks =>{  
       this.setState({
         bookmarks: bmarks
 
       }, () => console.log(this.state.bookmarks, "these are bokosihgosgoirg"))
 
     })
+  }
+
+  deleteFetch = (id) => {
+    // debugger
+    fetch(`http://localhost:3000/api/v1/bookmarks/${id}`, {
+      method: 'DELETE'
+    }).then(() => {
+
+    }).catch(err => {
+      console.error(err)
+    });
+    // console.log(this.state.bookmarks, "<=== bookmarks from app")
 
   }
+
+
 
   changePage = (newPage) => {
   if (this.state.page !== newPage){
@@ -122,7 +136,9 @@ switch(this.state.page){
         changePage={this.changePage}
         currentUser={this.state.currentUser}
         currentUserBookmark={this.currentUserBookmark}
-        bookmarks={this.state.bookmarks} />
+        bookmarks={this.state.bookmarks}
+        deleteFetch={this.deleteFetch} />
+
 
   default:
     return <Splash />

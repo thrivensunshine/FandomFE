@@ -32,10 +32,10 @@ console.log(this.props.bookmarks)
         <div className="grid" >
         {this.props.bookmarks.map(bmark =>{
         return (
-          <div className="favs">
-            <Favorite bmark={bmark} />
 
-          </div>
+            <Favorite bookmarks={this.props.bookmarks} deleteFetch={this.props.deleteFetch} key={bmark.id} bmark={bmark} />
+
+
 
         )
 
