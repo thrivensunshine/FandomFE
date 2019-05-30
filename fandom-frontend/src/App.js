@@ -10,7 +10,7 @@ class App extends React.Component {
 
 
 
-   state ={
+  state ={
     allShows: [],
     bookmarked: [],
     currentUser: [],
@@ -20,7 +20,7 @@ class App extends React.Component {
     showFav: false
   }
 
-
+  
 
   componentDidMount() {
     this.fetchShows()
@@ -95,8 +95,8 @@ class App extends React.Component {
   }
 
   currentUserBookmark = () => {
-let user = this.state.currentUser
-console.log(user)
+    let user = this.state.currentUser
+    console.log(user)
     fetch("http://localhost:3000/api/v1/bookmarks/getit",{
       method: "POST",
       headers: {
@@ -120,48 +120,48 @@ console.log(user)
 
 
   changePage = (newPage) => {
-  if (this.state.page !== newPage){
-    this.setState({page: newPage})
+    if (this.state.page !== newPage){
+      this.setState({page: newPage})
+    }
+
   }
 
-}
+  renderPage(){
+    switch(this.state.page){
 
-renderPage(){
-switch(this.state.page){
-
-  case "splash":
+      case "splash":
       return  <Splash currentUserHandler={this.currentUserHandler} />
-  case "search":
-    return <Search getShows={this.getShows}
-      allShows={this.state.allShows}
-      filteredArr={this.state.filteredArr}
-       bookmarkHandler={this.bookmarkHandler}
-       fetchShows={this.fetchShows}
-       changePage={this.changePage}
-       page={this.state.page}
-       bookmarks={this.state.bookmarks}
-      />
-    case "userHome":
-    return <UserHomepage page={this.state.page}
+      case "search":
+      return <Search getShows={this.getShows}
+        allShows={this.state.allShows}
+        filteredArr={this.state.filteredArr}
+        bookmarkHandler={this.bookmarkHandler}
+        fetchShows={this.fetchShows}
+        changePage={this.changePage}
+        page={this.state.page}
+        bookmarks={this.state.bookmarks}
+        />
+      case "userHome":
+      return <UserHomepage page={this.state.page}
         changePage={this.changePage}
         currentUser={this.state.currentUser}
         currentUserBookmark={this.currentUserBookmark}
         bookmarks={this.state.bookmarks}
         updateCurrentUser={this.updateCurrentUser} />
 
-  default:
-    return <Splash />
-}
-}
+      default:
+      return <Splash />
+    }
+  }
 
-render(){
+  render(){
 
-  return (
-    <div>
+    return (
+      <div>
         {this.renderPage()}
-    </div>
-  );
-}
+      </div>
+    );
+  }
 
 
 

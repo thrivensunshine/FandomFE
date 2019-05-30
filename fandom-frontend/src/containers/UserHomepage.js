@@ -65,7 +65,7 @@ null
 </div>
 
 
-        <button className="favbut" onClick={this.clickHandler}>{this.props.currentUser.name}'s Favorites!!</button>
+        <button className="favbut" onClick={this.clickHandler}> {this.props.currentUser.name}s Favorites!!</button>
           <br />
           <br />
           <div className="grid" >
